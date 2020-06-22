@@ -1,110 +1,62 @@
-# The Entities
-## The main entities for this application will be:
+For the BootcampX project, we will need to write many queries. In this exercise, we will go over the process that should be used when writing each query.
 
-students
-cohorts
-assignments
-assignment_submissions
-teachers
-assistance_requests
-We're going to start off simple and just focus on the queries for two entities: students and cohorts.
+Requirements
+In future exercises, we will receive a list of requirements that we will have to write queries for. Each query will be written in it's own .sql file. Before starting a new exercise, create a new directory that all of the query files can be stored in.
 
-A cohort will have the following attributes:
+Because each query will be inside its own file, we can write all of the SQL code in our text editor. We will then execute the query against our database using \i filename.sql from within our psql session.
 
-id: A unique identifier
-name: The name of the cohort
-start_date: The cohorts' start date
-end_date: The cohorts' end date
-A student will have the following attributes:
+We will now go over an example requirement and write the query for it. Before we start writing queries, let's create a new directory for this exercise.
 
-id: A unique identifier
-name: The full name of the student
-email: The students' email address
-phone: The students' phone number
-github: The students' github profile url
-start_date: The students' start date of the Bootcamp
-end_date: The students' end date of the Bootcamp
-cohort_id: The id of the cohort that the student is enrolled in
+Create a new directory in BootcampX called 0_selects
 
-### We can model these entities in an Entity Relation Diagram (ERD):
-- We will get much more into creating ERDs and Database Design in the next couple of days. For now, we will be mainly focusing on querying the database.
+Example Requirement
+We need a list of all of the students that haven't added their Github username to their account yet, so that we can tell them to add it.
 
-# Create a Database
-Using the ERD, we can create tables for the database; but before we do that, we need a database.
+Your task is to get all students without a Github username.
 
-Start a new psql session.
+Select their id, name, email, and cohort_id.
+Order them by cohort_id.
+Expected Result:
 
-From within the bootcampx directory, enter psql into terminal.
+ id  |       name        |             email              | cohort_id 
+-----+-------------------+--------------------------------+-----------
+  99 | Herminia Smitham  | sawayn.sarina@yahoo.com        |         7
+ 102 | Jacinthe Kautzer  | litzy_fay@hilpert.net          |         7
+ 111 | Bernardo Turcotte | margarita.anderson@paolo.name  |         8
+ 123 | Eloisa Quigley    | schmidt.ansel@gmail.com        |         9
+ 128 | Tiana Altenwerth  | zelda.stanton@yahoo.com        |         9
+...
+(20 rows)
+Results will be truncated in order to save space on the screen. In this example, there are 20 rows and these are the first 5.
 
-Create a database called bootcampx
+Steps
+Create a New SQL File
+Before doing anything, start by creating a new .sql inside the 0_selects. Name the file whatever you like, but adding a number at the beginning can help organize. A good name for this requirement might be 1_students_without_github.sql.
 
--- Create the database
-CREATE DATABASE bootcampx;
--- Start using the database
-\c bootcampx;
-You will have to enter \c bootcampx every time you enter a new psql session to make sure that you're using the correct database.
+Create a new file inside the 0_selects named 1_students_without_github.sql.
 
-# Tables
-Now that we have a database, we can create the tables for our student and cohort entities.
+Write The Query
+Open the file in your text editor and start writing the query. The query for this requirement can be found below. Try writing it yourself before looking at the answer.
 
-Write the CREATE TABLE statements for the students and a cohorts tables.
+Add the following SQL to your SQL file.
 
-Create a folder called migrations within the BootcampX folder.
-Inside migrations, create a new file called students_cohorts.sql
-Take a moment to try writing the CREATE TABLE statements yourself for students and cohorts. Use the ERD to help.
-Once you've given it a try, toggle the code block below to reveal our version of the code.
-Make sure the code in your students_cohorts.sql file is identical to the code below.
-Add the tables to the database.
+Format your SQL code correctly to make it more readable.
 
-From your psql session, type \i migrations/students_cohorts.sql
-Now enter \dt into your psql session to make sure the two tables have been created.
-Student and Cohort Data
-Take a look at all of the data in the students and cohorts tables.
+Use a separate line for each clause.
+Uppercase each reserved SQL keyword.
+Execute The Query
+As you're writing the query, you should be incrementally executing it in the database to make sure it's working correctly. There is no penalty for executing queries so execute as many times as you like.
 
-In psql, enter the following commands:
+Execute the SQL file.
 
-SELECT * FROM students;
-SELECT * FROM cohorts;
-We haven't added any data yet, so both tables contain 0 rows. Let's change that. We're going to need to add some fake data to test our queries against.
-
-Once the database is in production, it will contain lots of data, hundreds or maybe thousands of rows in each table, so we'll need to test our queries on a large set of data. This means we'll need hundreds of fake students to test with.
-
-Don't worry though, we're not going to write hundreds of INSERT statements; instead, we'll have some software generate a whole bunch of fake data. In fact, the project manager has already done this for us and uploaded the .sql files.
-
-Students http://bit.ly/2Z0fN4t
-Cohorts http://bit.ly/300nIQy
-Download the .sql files with the fake data in them.
-
-Create a folder named seeds inside the BootcampX folder.
-Download both of the .sql files using wget.
-wget http://bit.ly/2Z0fN4t -O seeds/students.sql
-
-wget http://bit.ly/300nIQy -O seeds/cohorts.sql
-We now have two files in the seeds directory, cohorts.sql and students.sql.
-
-Open the students.sql file and take a look at the data. Just rows and rows of fake student data. Let's add this data to the tables.
-
-Run the cohorts.sql and students.sql files against the bootcampx database.
-
-Inside the psql session, run the following commands:
-
-\i seeds/cohorts.sql
-\i seeds/students.sql
-This will result in a bunch of INSERT 0 1 appearing in the terminal window. Now try running the following command:
-
-SELECT count(*) FROM students;
-We've got 192 students to query against.
-
-Submit Code
-For the BootcampX project, we will be tracking everything in a single git repo.
-
-Create a git repo for BootcampX.
-
-Initialize a new git repo in the BootcampX folder git init.
-Commit all of the current code.
-Create a new repo on Github for the project.
-Push your project to Github.
-Submit a link to the project in this assignment.
+Make sure you're in a psql session.
+Execute psql from, the BootcampX directory.
+Make sure you're using the bootcampx database \c bootcampx
+Execute the query with the following command:
+\i 0_selects/1_students_without_github.sql
+Check The Answer
+The expected result will be posted with the requirement. Make sure to compare your answer with the expected result to make sure it's correct.
 
 Conclusion
-In this activity we setup the BootcampX database, added two tables, and seeded those tables with a bunch of fake data. With all of this setup, we can now start writing queries for BootcampX.
+In this exercise we walked through the process of completing a single query for BootcampX. In the following exercises, there will be many queries to complete, use this process for each of them.
+
