@@ -1,62 +1,122 @@
-For the BootcampX project, we will need to write many queries. In this exercise, we will go over the process that should be used when writing each query.
+We've received our first round of queries that need to be written for BootcampX. It's now time to start writing the SQL Queries.
 
+Setup
+Create a new directory in BootcampX called 1_queries.
+
+Remember to create a new file for each individual query.
+
+Tips
+Remember to try writing the query, even if you don't know exactly how it should be written.
+Build your queries incrementally and run them against the database as many times as you want.
+Reference the weekend material if you need help remembering how to do something.
 Requirements
-In future exercises, we will receive a list of requirements that we will have to write queries for. Each query will be written in it's own .sql file. Before starting a new exercise, create a new directory that all of the query files can be stored in.
+Students in Cohort
+Get the names of all of the students from a single cohort.
 
-Because each query will be inside its own file, we can write all of the SQL code in our text editor. We will then execute the query against our database using \i filename.sql from within our psql session.
+Select their id and name.
+Order them by their name in alphabetical order.
+Since this query needs to work with any specific cohort, just use any number for the cohort_id.
+Expected Result:
 
-We will now go over an example requirement and write the query for it. Before we start writing queries, let's create a new directory for this exercise.
+id |       name        
+----+-------------------
+  1 | Armand Hilll
+ 13 | Brian Jones
+ 16 | Carmel Grant
+ 14 | Clint Cremin
+ 17 | Colten Gutkowski
+...
+(18 rows)
+Your Answer
+Type in your answer here and Compass will let you reveal our answer below. Compass will auto-save your answer as you type. Once you click Toggle Answer below, your answer cannot be changed.
+Total Students in Cohorts
+The admissions department wants to know the total number of students from any number of cohorts combined.
 
-Create a new directory in BootcampX called 0_selects
+Select the total number of students who were in the first 3 cohorts.
 
-Example Requirement
-We need a list of all of the students that haven't added their Github username to their account yet, so that we can tell them to add it.
+Expected Result:
 
-Your task is to get all students without a Github username.
+ count 
+-------
+    48
+(1 row)
+Your Answer
+Type in your answer here and Compass will let you reveal our answer below. Compass will auto-save your answer as you type. Once you click Toggle Answer below, your answer cannot be changed.
+Contact Details
+We need to make sure that we can contact students through a phone number or through email. If student's don't have a phone number or email associated with their account, we'll need to message them on slack to update their details.
 
-Select their id, name, email, and cohort_id.
+Get all of the students that don't have an email or phone number.
+
+Get their name, id, and cohort_id.
+Expected Result:
+
+       name       | id  
+------------------+-----
+ Aurore Yundt     | 160
+ Cory Toy         | 161
+ Kurt Turcotte    | 163
+ Elda McClure     | 164
+ Luisa Sipes      | 168
+...
+(17 rows)
+Your Answer
+Type in your answer here and Compass will let you reveal our answer below. Compass will auto-save your answer as you type. Once you click Toggle Answer below, your answer cannot be changed.
+Non Gmail Students
+Recently we've been having trouble emailing students without a gmail account. To make sure that we can reliably contact all students, we'll need to make sure that student's without a gmail account have a phone number.
+
+Get all of the students without a gmail.com or phone number.
+
+Get their name, email, id, and cohort_id.
+Expected Result:
+
+      name       | id  |           email           | cohort_id 
+-----------------+-----+---------------------------+-----------
+ Javonte Ward    | 178 | jessie_howell@hotmail.com |        12
+ Jessika Jenkins | 187 | stephanie.koss@kevon.io   |        12
+ Jerrold Rohan   | 189 | wehner.twila@hotmail.com  |        12
+(3 rows)
+Your Answer
+Type in your answer here and Compass will let you reveal our answer below. Compass will auto-save your answer as you type. Once you click Toggle Answer below, your answer cannot be changed.
+Currently Enrolled Students
+A student's end date will be NULL when they are currently enrolled in Bootcamp.
+
+Get all of the students currently enrolled.
+
+Get their name, id, and cohort_id.
 Order them by cohort_id.
 Expected Result:
 
- id  |       name        |             email              | cohort_id 
------+-------------------+--------------------------------+-----------
-  99 | Herminia Smitham  | sawayn.sarina@yahoo.com        |         7
- 102 | Jacinthe Kautzer  | litzy_fay@hilpert.net          |         7
- 111 | Bernardo Turcotte | margarita.anderson@paolo.name  |         8
- 123 | Eloisa Quigley    | schmidt.ansel@gmail.com        |         9
- 128 | Tiana Altenwerth  | zelda.stanton@yahoo.com        |         9
+        name         | id  | cohort_id 
+---------------------+-----+-----------
+ Deon Hahn           | 151 |        11
+ Sean Bartell        | 152 |        11
+ Sarai Flatley       | 153 |        11
+ Billie Mitchell     | 154 |        11
+ Vance Kihn          | 155 |        11
 ...
-(20 rows)
-Results will be truncated in order to save space on the screen. In this example, there are 20 rows and these are the first 5.
+(42 rows)
+Your Answer
+Type in your answer here and Compass will let you reveal our answer below. Compass will auto-save your answer as you type. Once you click Toggle Answer below, your answer cannot be changed.
+Github Activity
+Once a student graduates, the career services department needs to keep track of their activity on Github. If a graduate has not linked their Github account, we need to contact them to do so.
 
-Steps
-Create a New SQL File
-Before doing anything, start by creating a new .sql inside the 0_selects. Name the file whatever you like, but adding a number at the beginning can help organize. A good name for this requirement might be 1_students_without_github.sql.
+Get all graduates without a linked Github account.
 
-Create a new file inside the 0_selects named 1_students_without_github.sql.
+Get their name, email, and phone.
+Expected Result:
 
-Write The Query
-Open the file in your text editor and start writing the query. The query for this requirement can be found below. Try writing it yourself before looking at the answer.
+       name        |             email             |    phone     
+-------------------+-------------------------------+--------------
+ Herminia Smitham  | sawayn.sarina@yahoo.com       | 778-251-5094
+ Jacinthe Kautzer  | litzy_fay@hilpert.net         | 075-883-5570
+ Bernardo Turcotte | margarita.anderson@paolo.name | 814-473-6929
+ Eloisa Quigley    | schmidt.ansel@gmail.com       | 276-965-2022
+ Tiana Altenwerth  | zelda.stanton@yahoo.com       | 448-872-0954
+ Hailie Kutch      | zora.corkery@goldner.net      | 249-763-9998
+(6 rows)
+Your Answer
+Type in your answer here and Compass will let you reveal our answer below. Compass will auto-save your answer as you type. Once you click Toggle Answer below, your answer cannot be changed.
+Submit Assignment
+Once you've completed all of the queries, it's time to push your work and mark this activity as completed.
 
-Add the following SQL to your SQL file.
-
-Format your SQL code correctly to make it more readable.
-
-Use a separate line for each clause.
-Uppercase each reserved SQL keyword.
-Execute The Query
-As you're writing the query, you should be incrementally executing it in the database to make sure it's working correctly. There is no penalty for executing queries so execute as many times as you like.
-
-Execute the SQL file.
-
-Make sure you're in a psql session.
-Execute psql from, the BootcampX directory.
-Make sure you're using the bootcampx database \c bootcampx
-Execute the query with the following command:
-\i 0_selects/1_students_without_github.sql
-Check The Answer
-The expected result will be posted with the requirement. Make sure to compare your answer with the expected result to make sure it's correct.
-
-Conclusion
-In this exercise we walked through the process of completing a single query for BootcampX. In the following exercises, there will be many queries to complete, use this process for each of them.
-
+Commit and push your code, then post a link to the 1_queries directory on Github.
